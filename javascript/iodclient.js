@@ -64,7 +64,7 @@ IODClient.prototype.Index.prototype = {
 		if (config.wildcard && !text.endsWith(" ")){
 			text+="*"
 		}
-		text+=':'+config.field;
+		text='('+text+'):'+config.field;
 		this.query(text,params,callback,method);
 	},
 
