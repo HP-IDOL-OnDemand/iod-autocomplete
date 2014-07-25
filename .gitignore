@@ -26,7 +26,10 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
+
+mytestindex.html
 
 # Thumbnails
 ._*

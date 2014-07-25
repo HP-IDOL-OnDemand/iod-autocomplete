@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan.js"></script>
+    <script src="javascript/iodclient.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.2/typeahead.bundle.min.js"></script>
+  </head>
+  <body>
+
+    <div class="demo">
+      <h3>Basic</h3>
+      <input class="typeahead" type="text" placeholder="Start typing" id="typeahead-iod"  spellcheck="false"/>
+    </div>
+
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+
+          var client = new IODClient('myapikey')
+          var index = client.getIndex('wiki_eng')
+          var newsindex = client.getIndex('news_eng')
+
+
+
+          // basic typeahead
+          $('#typeahead-iod').typeahead({
+              highlight: true,
+              minLength: 3,
+
+          }, {
+              source: index.ttAdapter({}, {
+                  'field': 'TITLE',
+                  'wildcard': true
+              }),
+              displayKey: 'title',
+              name: 'custom',
+              templates: {
+                  header: '<h3>Wiki</h3>'
+              }
+          }, {
+              source: newsindex.ttAdapter({}, {
+                  'field': 'TITLE',
+                  'wildcard': false
+              }),
+              displayKey: 'title',
+              name: 'news',
+              templates: {
+                  header: '<h3>News</h3>'
+              }
+          });
+
+
+      });
+    </script>
+
+  </body>
+</html>
